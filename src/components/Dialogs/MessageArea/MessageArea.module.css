@@ -1,0 +1,39 @@
+.area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 500px;
+    /* height: 350px; */
+    border: 1px dashed black;
+    padding-top: 5px;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.fr {
+    margin-left: 5%;
+    display: flex;
+    align-self: flex-start;
+}
+
+.you {
+    margin-left: 75%;
+    display: flex;
+    align-self: flex-end;
+}
+
+.inputs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5px;
+}
+
+.imgDialog {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}

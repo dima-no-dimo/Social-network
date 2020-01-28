@@ -57,7 +57,7 @@ body {
 
 }
 
-.nav ul li a {
+.nav ul a {
   text-decoration: none;
   color: black;
 }
@@ -68,22 +68,4 @@ body {
   margin-top: 3px;
   margin-right: 15%;
   padding: 20px 20px;
-}
-
-.content_user {
-  display: flex;
-}
-
-.content_user_photo {
-  width: 50px;
-  height: 50px;
-}
-
-.content_user_info {
-  margin-left: 10px;
-
-}
-
-.content_user_info p {
-  margin: 0px;
 }
