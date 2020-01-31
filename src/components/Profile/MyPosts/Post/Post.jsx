@@ -1,12 +1,23 @@
 import React from 'react'
-import cl from './post.module.css'
+import CLS from './post.module.css'
 
 const Post = (props) => {
+
+    let deletePost = () => {
+        let num = props.numP;
+        props.del.deleteElement({num})
+    }
+
     return (
-        <div className={cl.item}>
-            <h3 className="title">{props.numP}</h3>
-            <p className="desc">{props.cont}</p>
-            <div className="like">
+        <div className={CLS.item}>
+            <div className={CLS.titleWrapper}>
+                <h3 className={CLS.title}>{props.numP}</h3>
+                <div onClick={deletePost} className={CLS.close}>
+                    x
+                </div>
+            </div>
+            <div className={CLS.contWrapper}>
+                <p className={CLS.desc}>{props.cont}</p>
                 <span>Like</span>
             </div>
         </div>

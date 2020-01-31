@@ -1,31 +1,37 @@
 import React from 'react'
-import classes from './../profile.module.css'
+import CLS from './../profile.module.css'
 import { Post } from './Post/Post'
+import {changePostAreaActionCreator, createNewPostActionCreator} from "../../../state";
+
+
+
 
 const Posts = (props) => {
-
-    let text = React.createRef();
-    let postCreate = () => {
-        alert(text.current.value);
-
-    }
-
-    let jsxPost = props.postData.map((item) => {
+    let jsxPost = props.profile.state.pageProfile.postData.map((item) => {
         return (
-            <Post cont={item.content} numP={item.title} />
+            <Post del={props.profile} cont={item.content} numP={item.title} />
         )
-    })
+    });
+
+    let postCreate = () => {
+        props.dispatch(createNewPostActionCreator());
+    };
+
+    let onTextareaChange = (e) => {
+        let textareaTyped = e.target.value;
+        props.dispatch(changePostAreaActionCreator(textareaTyped));
+
+    };
 
     return (
-        <article className={classes.post}>
+        <article className={CLS.post}>
             <h3>
                 New post
             </h3>
-            <textarea ref={text}></textarea>
+            <textarea onChange={onTextareaChange} value={props.profile.state.pageProfile.textareaText} />
             <br />
             <button onClick={postCreate}>Submit</button>
             {jsxPost}
-
         </article>
     )
 }

@@ -5,15 +5,14 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import CurrentDialog from './Dialog/CurrentDialog'
 
 const MessageArea = (props) => {
-    // debugger;
     return (
         // <BrowserRouter>
             <div className={CLS['area']}>
 
-                <Route path='/Dialogs/Dima' render={() => <CurrentDialog messages={props.messages.messagesD} />} />
-                <Route path='/Dialogs/Roma' render={() => <CurrentDialog messages={props.messages.messagesR} />} />
+                <Route path='/Dialogs/Dima' render={() => <CurrentDialog messages={props.messageArea.state.pageMessages.AllMessages.messagesD} />} />
+                <Route path='/Dialogs/Roma' render={() => <CurrentDialog messages={props.messageArea.state.pageMessages.AllMessages.messagesR} />} />
 
-                <Inputs funcMess={props.funcMess} />
+                <Inputs dispatch={props.dispatch}  store={props.messageArea} />
             </div>
         // </BrowserRouter>
     )

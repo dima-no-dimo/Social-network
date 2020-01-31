@@ -4,17 +4,12 @@ import CLS from './Dialogs.module.css'
 import {NavLink, BrowserRouter} from 'react-router-dom'
 import {DialogAuthor} from './DialogAuthor/DialogAuthor'
 
-
-
-
-
-
-
 const Dialogs = (props) => {
 
-    let jsxAuthors = props.data.DialogAuthors.map((item) => {
+    let jsxAuthors = props.dialogs.state.pageMessages.DialogAuthors.map((item) => {
+        let last = props.dialogs.lastMessage(item.authorName);
         return (
-            <DialogAuthor authorName={item.authorName} lastMessage={item.lastMessage} avatar={item.avatar} />
+            <DialogAuthor lastMessage={last} authorName={item.authorName} avatar={item.avatar} />
         )
     })
 
@@ -22,12 +17,10 @@ const Dialogs = (props) => {
             <section className={CLS.sec}>
                 <div>
                     {jsxAuthors}
-                    {/* <DialogAuthor authorName="Dima" lastMessage="Hi!" avatar="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg" />
-                    <DialogAuthor authorName="Roma" lastMessage="By!" avatar="https://i.pinimg.com/236x/6a/80/5e/6a805e7a764096dde0f0b4313379d0ba.jpg" /> */}
                 </div>
                 <div>
                     <p>Current dialog</p>
-                    <MessageArea funcMess={props.data} messages={props.dataM} />
+                    <MessageArea fun={props.fun} messageArea={props.dialogs} dispatch={props.dispatch} />
                 </div>
                 <div></div>
             </section>

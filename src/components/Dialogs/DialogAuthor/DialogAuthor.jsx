@@ -5,6 +5,7 @@ import CLS from './DialogAuthor.module.css'
 
 
 const DialogAuthor = (props) => {
+
     return (
         <NavLink to={'/Dialogs/' + props.authorName} activeClassName={CLS.active} className={CLS.link}>
             <div className={CLS.display}>

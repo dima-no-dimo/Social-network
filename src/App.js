@@ -13,10 +13,10 @@ function App(props) {
     <BrowserRouter>
       <div className="app_wrapper">
         <Header />
-        <Nav friends={props.data.friends} />
+        <Nav friends={props.store.state.friends} />
         <div className="content">
-          <Route path="/Profile" render={() => <Profile postData={props.data.postData} />} />
-          <Route path="/Dialogs" render={() => <Dialogs data={props.data.pageMessages} dataM={props.data.AllMessages} />} />
+          <Route path="/Profile" render={() => <Profile profile={props.store} dispatch={props.dispatch} />} />
+          <Route path="/Dialogs" render={() => <Dialogs fun={props.fun} dialogs={props.store} dispatch={props.dispatch} />} />
         </div>
         
       </div>
