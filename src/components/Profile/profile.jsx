@@ -1,13 +1,13 @@
 import React from 'react'
 import { User } from './user'
-import { Posts } from './MyPosts/Posts'
+import PostsContainer from "./MyPosts/PostsContainer";
 
 
 const Profile = (props) => {
     return (
         <div>
             <User />
-            <Posts dispatch={props.dispatch} profile={props.profile} />
+            <PostsContainer dispatch={props.dispatch} profile={props.profile} />
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import * as serviceWorker from './serviceWorker';
-import {store} from './state'
+import store from './reduxStore'
 import './index.css';
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -7,7 +7,7 @@ import App from './App';
 import './index.css';
 
 let rend = () => {
-    ReactDOM.render(<App store={store} fun={store.writeState} dispatch={store.dispatch.bind(store)} />, document.getElementById('root'));
+    ReactDOM.render(<App store={store} dispatch={store.dispatch.bind(store)} />, document.getElementById('root'));
 };
 
 rend();

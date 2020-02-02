@@ -19,7 +19,7 @@ const Nav = (props) => {
           <li><a href="/Settings">Settings</a></li>
           <li>
             <div className={CLS.friends}>
-              <Friends friends={props.friends} />
+              <Friends friends={props.friends.friendsReducer} />
             </div>
           </li>
         </ul>

@@ -16,7 +16,7 @@ const Friends = (props) => {
             <h3>
                 Friends
             </h3>
-            <div className={CLS.friendsWraper}> 
+            <div className={CLS.friendsWraper}>
                 {jsxFriends}
             </div>
         </div>
