@@ -26,10 +26,10 @@ const profielPageReducer = (state=initialState, action) => {
             if(!state.textareaText) return state;
             state.postData.push(newPost);
             state.textareaText = '';
-            return state
+            return state;
         case CHANGE_POST_AREA:
             state.textareaText = action.letter;
-            return state
+            return state;
         default: return state;
     }
 }

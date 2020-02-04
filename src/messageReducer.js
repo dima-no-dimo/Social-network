@@ -81,7 +81,7 @@ const messagePageReducer = (state=initialSrtate, action) => {
             return state;
         default: return state;
     }
-}
+};
 export const createNewMessageActionCreator = () => {
     return {
         type: CREATE_NEW_MESSAGE,
