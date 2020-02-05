@@ -15,24 +15,29 @@ let initialState = {
     textareaText: 'type',
 };
 
-const profielPageReducer = (state=initialState, action) => {
-
+const profilePageReducer = (state=initialState, action) => {
     switch (action.type) {
-        case CREATE_NEW_POST:
+        case CREATE_NEW_POST:{
+            let stateCopy = {...state};
             let newPost = {
                 content: state.textareaText,
                 title: `Post ${state.postData.length + 1}`
             };
-            if(!state.textareaText) return state;
-            state.postData.push(newPost);
-            state.textareaText = '';
-            return state;
-        case CHANGE_POST_AREA:
-            state.textareaText = action.letter;
-            return state;
+            if(!state.textareaText) return stateCopy;
+            stateCopy.postData = [...state.postData];
+            stateCopy.postData.push(newPost);
+            stateCopy.textareaText = '';
+            return stateCopy;
+        }
+        case CHANGE_POST_AREA:{
+            let stateCopy = {...state};
+
+            stateCopy.textareaText = action.letter;
+            return stateCopy;
+        }
         default: return state;
     }
-}
+};
 export const createNewPostActionCreator = () => ({type: CREATE_NEW_POST,});
 export const changePostAreaActionCreator = (txt) => {
     return {
@@ -41,5 +46,5 @@ export const changePostAreaActionCreator = (txt) => {
     }
 };
 
-export default profielPageReducer
+export default profilePageReducer
 

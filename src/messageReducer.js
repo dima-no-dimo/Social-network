@@ -1,7 +1,7 @@
 const CREATE_NEW_MESSAGE = 'CREATE_NEW_MESSAGE';
 const CHANGE_MESSAGE_AREA = 'CHANGE_MESSAGE_AREA';
 
-let initialSrtate = {
+let initialState = {
     DialogAuthors: [
         {
             authorName: "Dima",
@@ -14,8 +14,9 @@ let initialSrtate = {
     ],
         // currentDialog: 'r',
         textareaText: 'type',
+        toWho: 'D',
         AllMessages: {
-        messagesD: [
+            messagesD: [
             {
                 id: 'Dima',
                 txt: 'blablabla',
@@ -64,21 +65,35 @@ let initialSrtate = {
     },
 };
 
-const messagePageReducer = (state=initialSrtate, action) => {
+const messagePageReducer = (state=initialState, action) => {
+
     switch (action.type) {
-        case CREATE_NEW_MESSAGE:
+        case CREATE_NEW_MESSAGE:{
+            let stateCopy = { ...state,
+                AllMessages: {...state.AllMessages,
+                    messagesD: [...state.AllMessages.messagesD],
+                    messagesR: [...state.AllMessages.messagesR],
+                }
+            };
             let objMess = {
-                txt: state.textareaText,
+                txt: stateCopy.textareaText,
                 from: 'you',
                 imgURL: 'https://static-cdn.123rf.com/images/v5/index-thumbnail/84170952-b.jpg'
             };
-            if(!state.textareaText) return state;
-            state.AllMessages.messagesD.push(objMess);
-            state.textareaText = '';
-            return state;
-        case CHANGE_MESSAGE_AREA:
-            state.textareaText = action.letter;
-            return state;
+            if(!state.textareaText) return stateCopy;
+            stateCopy.AllMessages[`messages${state.toWho}`].push(objMess);
+            stateCopy.textareaText = '';
+
+            console.log(stateCopy.toWho);
+
+            return stateCopy;
+        }
+        case CHANGE_MESSAGE_AREA:{
+            let stateCopy = {...state};
+            stateCopy.textareaText = action.letter;
+            // console.log(stateCopy, state);
+            return stateCopy;
+        }
         default: return state;
     }
 };

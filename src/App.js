@@ -16,9 +16,8 @@ function App(props) {
         <Nav friends={props.store.getState()} />
         <div className="content">
           <Route path="/Profile" render={() => <Profile profile={props.store.getState()} dispatch={props.dispatch} />} />
-          <Route path="/Dialogs" render={() => <Dialogs dialogs={props.store.getState().message} dispatch={props.dispatch} />} />
+          <Route path="/Dialogs" render={() => <Dialogs dialogs={props.store.getState().messagePageReducer} dispatch={props.dispatch} />} />
         </div>
-        
       </div>
     </BrowserRouter>
   );

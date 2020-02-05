@@ -3,6 +3,7 @@ import { MessageArea } from './MessageArea/MessageArea'
 import CLS from './Dialogs.module.css'
 import {NavLink, BrowserRouter} from 'react-router-dom'
 import {DialogAuthor} from './DialogAuthor/DialogAuthor'
+import Route from "react-router-dom/es/Route";
 
 const Dialogs = (props) => {
     let jsxAuthors = props.dialogs.DialogAuthors.map((item) => {
@@ -19,7 +20,9 @@ const Dialogs = (props) => {
                 </div>
                 <div>
                     <p>Current dialog</p>
+
                     <MessageArea messageArea={props.dialogs} dispatch={props.dispatch} />
+
                 </div>
                 <div></div>
             </section>
