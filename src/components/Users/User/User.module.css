@@ -1,0 +1,81 @@
+/*.showMore {
+
+}*/
+
+.showMore {
+    margin: 5px 45%;
+
+    background:linear-gradient(to bottom, #7f0cb4 5%, #3f055c 100%);
+    background-color:#7f0cb4;
+    border-radius:5px;
+    border:1px solid #7f0cb4;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    padding:10px 20px;
+    text-decoration:none;
+    text-shadow:0px -1px 0px #000000;
+}
+.showMore:hover {
+    background:linear-gradient(to bottom, #3f055c 5%, #7f0cb4 100%);
+    background-color:#3f055c;
+}
+.showMore:active {
+    position:relative;
+    top:1px;
+}
+
+
+/*________________________________________________________*/
+
+
+.headWrapper {
+    margin-left: 20%;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.wrapper {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 10px 10px;
+    padding: 10px;
+}
+
+.img {
+    width: 60px;
+    height: 60px;
+    border-radius: 40%;
+    margin: 25px 15px 0 0;
+}
+
+.text {
+    /*margin-left: 10px;*/
+}
+
+.myButton {
+    box-shadow:inset 0px -3px 7px 0px #17a8eb;
+    background:linear-gradient(to bottom, #000000 5%, #000000 100%);
+    background-color:#000000;
+    border-radius:3px;
+    border:1px solid #0b0e07;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Courier New;
+    font-size:12px;
+    padding:3px 5px;
+    text-decoration:none;
+}
+.myButton:hover {
+    background:linear-gradient(to bottom, #000000 5%, #000000 100%);
+    background-color:#000000;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}

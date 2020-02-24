@@ -66,32 +66,26 @@ let initialState = {
 };
 
 const messagePageReducer = (state=initialState, action) => {
-
     switch (action.type) {
         case CREATE_NEW_MESSAGE:{
-            let stateCopy = { ...state,
-                AllMessages: {...state.AllMessages,
-                    messagesD: [...state.AllMessages.messagesD],
-                    messagesR: [...state.AllMessages.messagesR],
-                }
-            };
+
             let objMess = {
-                txt: stateCopy.textareaText,
+                txt: state.textareaText,
                 from: 'you',
                 imgURL: 'https://static-cdn.123rf.com/images/v5/index-thumbnail/84170952-b.jpg'
             };
-            if(!state.textareaText) return stateCopy;
-            stateCopy.AllMessages[`messages${state.toWho}`].push(objMess);
-            stateCopy.textareaText = '';
+            if(!state.textareaText) return state;
 
-            console.log(stateCopy.toWho);
-
-            return stateCopy;
+            return { ...state,
+                AllMessages: {...state.AllMessages,
+                    [`messages${state.toWho}`]: [...state.AllMessages[`messages${state.toWho}`], objMess]
+                },
+                textareaText: ''
+            };
         }
         case CHANGE_MESSAGE_AREA:{
             let stateCopy = {...state};
             stateCopy.textareaText = action.letter;
-            // console.log(stateCopy, state);
             return stateCopy;
         }
         default: return state;

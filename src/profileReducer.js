@@ -18,22 +18,30 @@ let initialState = {
 const profilePageReducer = (state=initialState, action) => {
     switch (action.type) {
         case CREATE_NEW_POST:{
-            let stateCopy = {...state};
             let newPost = {
                 content: state.textareaText,
                 title: `Post ${state.postData.length + 1}`
             };
-            if(!state.textareaText) return stateCopy;
-            stateCopy.postData = [...state.postData];
-            stateCopy.postData.push(newPost);
-            stateCopy.textareaText = '';
-            return stateCopy;
+            if(!state.textareaText) return state;
+
+            // stateCopy.postData.push(newPost);
+            // stateCopy.textareaText = '';
+            return {
+                ...state,
+                postData: [...state.postData, newPost],
+                textareaText: ''
+            };
         }
         case CHANGE_POST_AREA:{
-            let stateCopy = {...state};
+            /*let stateCopy = {...state};
 
             stateCopy.textareaText = action.letter;
-            return stateCopy;
+            return stateCopy;*/
+
+            return {
+                ...state,
+                textareaText: action.letter
+            }
         }
         default: return state;
     }

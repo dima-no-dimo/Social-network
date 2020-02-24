@@ -3,7 +3,6 @@ import { MessageArea } from './MessageArea/MessageArea'
 import CLS from './Dialogs.module.css'
 import {NavLink, BrowserRouter} from 'react-router-dom'
 import {DialogAuthor} from './DialogAuthor/DialogAuthor'
-import Route from "react-router-dom/es/Route";
 
 const Dialogs = (props) => {
     let jsxAuthors = props.dialogs.DialogAuthors.map((item) => {

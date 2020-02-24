@@ -5,6 +5,7 @@ import Nav from './components/Nav/nav'
 import Profile from './components/Profile/profile'
 import { Dialogs } from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom'
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 
@@ -17,6 +18,7 @@ function App(props) {
         <div className="content">
           <Route path="/Profile" render={() => <Profile profile={props.store.getState()} dispatch={props.dispatch} />} />
           <Route path="/Dialogs" render={() => <Dialogs dialogs={props.store.getState().messagePageReducer} dispatch={props.dispatch} />} />
+          <Route path={'/Users'} render={() => <UsersContainer />} />
         </div>
       </div>
     </BrowserRouter>

@@ -20,6 +20,6 @@ const CurrentDialog = (props) => {
 
                 </div>
     )
-}
+};
 
 export default CurrentDialog
