@@ -1,31 +1,43 @@
 import React from 'react'
-import { MessageArea } from './MessageArea/MessageArea'
-import CLS from './Dialogs.module.css'
-import {NavLink, BrowserRouter} from 'react-router-dom'
+import CLS from './MessageArea/MessageArea.module.css'
 import {DialogAuthor} from './DialogAuthor/DialogAuthor'
+import CurrentDialogContainer from "./MessageArea/Dialog/CurrentDialogContainer";
+import InputsContainer from "./MessageArea/Inputs/InputsContainer";
 
-const Dialogs = (props) => {
-    let jsxAuthors = props.dialogs.DialogAuthors.map((item) => {
-        let last = 's';
-            // props.dialogs.lastMessage(item.authorName);
+class Dialogs extends React.Component {
+    jsxAuthors = () => {
+        if(this.props.messagePage.dialogs.length === 0) return null;
+        return this.props.messagePage.dialogs.map((item) => {
+            return (
+                <DialogAuthor key={item.id} click={this.messagesFromServer} authorName={item.name} avatar={item.avatar} id={item.id} />
+            )
+        })
+    };
+    messagesFromServer = (id) => {
+        this.props.getMessageData_TC(`${this.props.myId}?toWho=${id}`, this.props.jwt, id)
+    };
+    componentDidMount() {
+        this.props.getMessageData_TC(this.props.myId, this.props.jwt)
+    }
+
+    render() {
         return (
-            <DialogAuthor lastMessage={last} authorName={item.authorName} avatar={item.avatar} />
-        )
-    })
-    return (
             <section className={CLS.sec}>
                 <div>
-                    {jsxAuthors}
+                    {this.jsxAuthors()}
                 </div>
                 <div>
                     <p>Current dialog</p>
-
-                    <MessageArea messageArea={props.dialogs} dispatch={props.dispatch} />
+                    <div className={CLS['area']}>
+                        <CurrentDialogContainer />
+                        <InputsContainer />
+                    </div>
 
                 </div>
                 <div></div>
             </section>
-    )
+        )
+    }
 }
 
 export {Dialogs}

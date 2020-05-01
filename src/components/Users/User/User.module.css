@@ -79,3 +79,12 @@
     position:relative;
     top:1px;
 }
+
+.page {
+    cursor: pointer;
+}
+
+.pageActive {
+    font-weight: bold;
+    cursor: pointer;
+}

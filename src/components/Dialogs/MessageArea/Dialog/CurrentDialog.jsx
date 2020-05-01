@@ -1,25 +1,22 @@
 import React from 'react'
 import CLS from './../MessageArea.module.css'
-import YourMessage from './yourMessage/Message'
-import FriendMessage from './FriendMessage/Message'
+import Message from './Message/Message'
 
-const CurrentDialog = (props) => {
-    let jsxMess = props.messagePage.map((item) => {
-        if(item.from === 'you') {
-            return <YourMessage txt={item.txt} from={item.from} imgURL={item.imgURL} />
-        } else {
-            return <FriendMessage txt={item.txt} from={item.from} imgURL={item.imgURL} />
-        }
+class CurrentDialog extends React.Component {
+    jsxMess = () => {
+            return this.props.messagePage.currentMessages.map(item => {
+                   return <Message key={item._id} txt={item.txt} from={item.my} imgURL={item.imgUrl} />
+        })
+    };
 
-
-});
-    return (
-        <div className={CLS['messages']}>
-
-                    {jsxMess}
-
-                </div>
-    )
-};
+    render() {
+        return (
+            <div className={CLS['messages']}>
+                        {this.jsxMess()}
+    
+                    </div>
+        )
+    }
+}
 
 export default CurrentDialog

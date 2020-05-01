@@ -34,6 +34,16 @@ body {
   padding-left: 50px;
 }
 
+.header_login {
+  text-decoration: none;
+  padding: 15px;
+  margin-left: 70%;
+}
+
+.active_link {
+  color: white;
+}
+
 .nav {
   margin-left: 30%;
   grid-area: n;

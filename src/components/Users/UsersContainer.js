@@ -1,21 +1,23 @@
 import {connect} from "react-redux";
 import Users from "./Users";
-import {createFollowButtonAC, setUsersAC} from "../../userPageReducers";
+import {
+    setUsers_TC,
+    subscribeTo_TC
+} from "../../userPageReducers";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/authRedirect";
 
 
 let mapStateToProps = (state) => {
     return {
-        userPageReducer: state.usersPageReducer.users,
-    }
-};
-let mapDispatchToProps = (dispatch) => {
-    return {
-        toggleFollow: (id) => dispatch(createFollowButtonAC(id)),
-        setUsers: (users) => dispatch(setUsersAC(users))
+        usersPage: state.usersPageReducer,
+        myId: state.authPageReducer._userId,
     }
 };
 
-
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const UsersContainer = compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {setUsers_TC, subscribeTo_TC})
+)(Users);
 
 export default UsersContainer;

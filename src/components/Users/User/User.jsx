@@ -1,18 +1,21 @@
 import React from "react";
 import CLS from './User.module.css';
-import * as axios from 'axios'
+import { NavLink } from "react-router-dom";
 
 const User = (props) => {
-
-
-
-
     return (
         <div className={CLS.headWrapper}>
             <div>
-                <img className={CLS.img} src={props.avatar} alt=""/>
+                <NavLink to={`/Profile/${props.id}`}>
+                    <img className={CLS.img} src={props.avatar}  alt=""/>
+                </NavLink>
                 <br/>
-                <a href='#' onClick={() => props.toggle(props.id)} className={CLS.myButton}>{props.follow}</a>
+                {props.id !== props.myId ?
+                    (<a href='#' onClick={(e) => props.toggle({userId: props.id,
+                    follow: e.target.innerHTML})
+                }
+                   className={CLS.myButton}>{(props.follow && 'unfollow') || 'follow'}</a>)
+                    : null}
             </div>
             <div className={CLS.wrapper}>
                 

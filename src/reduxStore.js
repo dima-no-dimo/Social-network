@@ -1,16 +1,16 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import profilePageReducer from "./profileReducer";
 import messagePageReducer from "./messageReducer";
-import friendsReducer from "./friendsReducer";
 import {usersPageReducer} from "./userPageReducers";
+import authPageReducer from "./authReducer";
+import thunkMiddleware from 'redux-thunk';
 
 let reducers = combineReducers({
     profilePageReducer,
     messagePageReducer,
-    friendsReducer,
     usersPageReducer,
+    authPageReducer,
 });
 
-let store = createStore(reducers);
-
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 export default store

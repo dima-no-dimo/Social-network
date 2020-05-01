@@ -1,44 +1,15 @@
-import React from 'react'
 import Inputs from "./Inputs";
-import {changeMessageAreaActionCreator, createNewMessageActionCreator} from "../../../../messageReducer";
+import {sendMessage_TC} from "../../../../messageReducer";
 import {connect} from "react-redux";
-
-
-// const InputsContainer = (props) => {
-//
-//     let submitMessage = () => {
-//         props.dispatch(createNewMessageActionCreator());
-//     }
-//
-//     let onChangedArea = (e) => {
-//         let text = e.target.value;
-//         props.dispatch(changeMessageAreaActionCreator(text))
-//     }
-//
-//     return (
-//         <Inputs store={props.store}
-//                 submitMessage={submitMessage}
-//                 onChangedArea={onChangedArea}
-//         />
-//     )
-// }
 
 let mapStateToProps = (state) => {
     return {
-        messagePage: state.messagePageReducer
+        messagePage: state.messagePageReducer,
+        myId: state.authPageReducer._userId
     }
 }
-let mapDispatchToProps = (dispatch) => {
-    return {
-        submitMessage: () => dispatch(createNewMessageActionCreator()),
-        onChangedArea: (e) => {
-            let text = e.target.value;
-            dispatch(changeMessageAreaActionCreator(text))
-        }
-    }
-};
 
-const InputsContainer = connect(mapStateToProps, mapDispatchToProps)(Inputs);
+const InputsContainer = connect(mapStateToProps, {sendMessage_TC})(Inputs);
 
 
 

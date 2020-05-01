@@ -3,26 +3,15 @@ import CLS from './post.module.css'
 
 const Post = (props) => {
 
-    // let deletePost = () => {
-    //     let num = props.numP;
-    //     props.del.deleteElement({num})
-    // }
-
-
-   /* <div onClick={deletePost} className={CLS.close}>
-        x
-    </div>*/
-
     return (
         <div className={CLS.item}>
             <div className={CLS.titleWrapper}>
-                <h3 className={CLS.title}>{props.numP}</h3>
-
+                <h3 className={CLS.title}>{props.date}</h3>
             </div>
             <div className={CLS.contWrapper}>
                 <p className={CLS.desc}>{props.cont}</p>
-                <span>Like</span>
             </div>
+            <div className={CLS.close} onClick={()=>{props.del(props.id)}}>x</div>
         </div>
     )
 }

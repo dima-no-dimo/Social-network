@@ -1,41 +1,28 @@
-import {changePostAreaActionCreator, createNewPostActionCreator} from "../../../profileReducer";
-import {Posts} from "./Posts";
-import {connect} from "react-redux";
+// import {changePostArea, createNewPost, setPosts, deletePost} from "../../../profileReducer";
+// import {withPosts} from "./Posts";
+// import {connect} from "react-redux";
 
+// let mapStateToProps = (state) => {
+//     return {
+//         profile: state.profilePageReducer.profileData,
+//         selectedUserId: state.usersPageReducer.selectedUserId,
+//         textareaText: state.profilePageReducer.textareaText
+//     }
+// };
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         createNewPost: () => dispatch(createNewPost()),
+//         changePostArea: (e) => {
+//             // let textareaTyped = e.target.value;
+//             dispatch(changePostArea(e))
+//         },
+//         setPosts: (postData) => dispatch(setPosts(postData)),
+//         deletePost: (id) => dispatch(deletePost(id))
+//     }
+// };
 
-// const PostsContainer = (props) => {
-//
-//
-//     let postCreate = () => {
-//         props.dispatch(createNewPostActionCreator());
-//     };
-//
-//     let onTextareaChange = (e) => {
-//         let textareaTyped = e.target.value;
-//         props.dispatch(changePostAreaActionCreator(textareaTyped));
-//
-//     };
-//
-//     return (
-//         <Posts profile={props.profile.profilePageReducer} onTextareaChange={onTextareaChange} postCreate={postCreate} />
-//     )
-// }
+// const PostsContainer = connect(mapStateToProps, {
+//     createNewPost, changePostArea, setPosts, deletePost
+// })(withPosts);
 
-let mapStateToProps = (state) => {
-    return {
-        profile: state.profilePageReducer,
-    }
-};
-let mapDispatchToProps = (dispatch) => {
-    return {
-        postCreate: () => dispatch(createNewPostActionCreator()),
-        onTextareaChange: (e) => {
-            let textareaTyped = e.target.value;
-            dispatch(changePostAreaActionCreator(textareaTyped))
-        }
-    }
-};
-
-const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
-
-export default PostsContainer;
+// export default PostsContainer;

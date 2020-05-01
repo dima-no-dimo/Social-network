@@ -1,56 +1,76 @@
-const CREATE_NEW_POST = 'CREATE_NEW_POST';
-const CHANGE_POST_AREA = 'CHANGE_POST_AREA';
+import {deletePost, getUserInfo, newPost} from "./DAL/requests";
+
+const SET_PROFILE_DATA = 'SET_PROFILE_DATA';
+const SET_POST_DATA = 'SET_POST_DATA';
+
 
 let initialState = {
-    postData: [
-        {
-            content: 'Content for first post',
-            title: 'Post 1'
-        },
-        {
-            content: 'Content for second post',
-            title: 'Post 2'
-        }
-    ],
-    textareaText: 'type',
+    profileData: {
+    postData: [],
+    userData: {},
+    },
 };
 
 const profilePageReducer = (state=initialState, action) => {
     switch (action.type) {
-        case CREATE_NEW_POST:{
-            let newPost = {
-                content: state.textareaText,
-                title: `Post ${state.postData.length + 1}`
-            };
-            if(!state.textareaText) return state;
-
-            // stateCopy.postData.push(newPost);
-            // stateCopy.textareaText = '';
+        case SET_PROFILE_DATA: {
             return {
                 ...state,
-                postData: [...state.postData, newPost],
-                textareaText: ''
-            };
+                profileData: {userData: action.data.userInfo, postData: action.data.posts}
+            }
         }
-        case CHANGE_POST_AREA:{
-            /*let stateCopy = {...state};
-
-            stateCopy.textareaText = action.letter;
-            return stateCopy;*/
-
+        case SET_POST_DATA: {
             return {
-                ...state,
-                textareaText: action.letter
+                ...state, profileData: {userData: state.profileData.userData, postData: action.data}
             }
         }
         default: return state;
     }
 };
-export const createNewPostActionCreator = () => ({type: CREATE_NEW_POST,});
-export const changePostAreaActionCreator = (txt) => {
+
+
+export const setProfile = (data) => {
     return {
-        type: CHANGE_POST_AREA,
-        letter: txt,
+        type: SET_PROFILE_DATA,
+        data,
+    }
+};
+export const setPost = (data) => {
+    return {
+        type: SET_POST_DATA,
+        data
+    }
+};
+
+export const getUserInfo_Posts_TC = (userId, jwt) => {
+    return (dispatch) => {
+        const headers = {
+            authorization: `Bearer ${jwt}`,
+        };
+        getUserInfo(userId, headers).then(data => {
+            dispatch(setProfile(data))
+        })
+
+    }
+};
+export const createPost_TC = (data, jwt) => {
+    return (dispatch) => {
+        const headers = {
+            authorization: `Bearer ${jwt}`,
+        };
+        newPost(data, headers).then(data => {
+            dispatch(setPost(...data))
+        });
+    }
+};
+export const deletePost_TC = (id, postId, jwt) => {
+    return (dispatch) => {
+        const headers = {
+            authorization: `Bearer ${jwt}`,
+        };
+        deletePost(id, postId, headers).then(data => {
+            dispatch(setPost(...data))
+        })
     }
 };
 

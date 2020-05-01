@@ -1,105 +1,78 @@
-const CREATE_NEW_MESSAGE = 'CREATE_NEW_MESSAGE';
-const CHANGE_MESSAGE_AREA = 'CHANGE_MESSAGE_AREA';
+import {createMessage, getMessageData} from "./DAL/requests";
+
+const SET_CURRENT_MESSAGES = 'SET_CURRENT_MESSAGES';
+const SET_DIALOGS = 'SET_DIALOGS';
+const SET_CURRENT_AUTHOR = 'SET_CURRENT_AUTHOR';
 
 let initialState = {
-    DialogAuthors: [
-        {
-            authorName: "Dima",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg"
-        },
-        {
-            authorName: "Roma",
-            avatar: "https://i.pinimg.com/236x/6a/80/5e/6a805e7a764096dde0f0b4313379d0ba.jpg"
-        }
-    ],
-        // currentDialog: 'r',
-        textareaText: 'type',
-        toWho: 'D',
-        AllMessages: {
-            messagesD: [
-            {
-                id: 'Dima',
-                txt: 'blablabla',
-                from: 'you',
-                imgURL: 'https://static-cdn.123rf.com/images/v5/index-thumbnail/84170952-b.jpg'
-            },
-            {
-                txt: 'lalala',
-                from: 'Dima',
-                imgURL: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg'
-            },
-            {
-                txt: 'kokoko',
-                from: 'Dima',
-                imgURL: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg'
-            },
-            {
-                txt: 'hahaha',
-                from: 'you',
-                imgURL: 'https://static-cdn.123rf.com/images/v5/index-thumbnail/84170952-b.jpg'
-            },
-        ],
-            messagesR: [
-            {
-                id: 'Roma',
-                txt: 'hi',
-                from: 'you',
-                imgURL: 'https://static-cdn.123rf.com/images/v5/index-thumbnail/84170952-b.jpg'
-            },
-            {
-                txt: 'kek',
-                from: 'Roma',
-                imgURL: 'https://i.pinimg.com/236x/6a/80/5e/6a805e7a764096dde0f0b4313379d0ba.jpg'
-            },
-            {
-                txt: 'bebebe',
-                from: 'Roma',
-                imgURL: 'https://i.pinimg.com/236x/6a/80/5e/6a805e7a764096dde0f0b4313379d0ba.jpg'
-            },
-            {
-                txt: 'bye',
-                from: 'you',
-                imgURL: 'https://static-cdn.123rf.com/images/v5/index-thumbnail/84170952-b.jpg'
-            }
-        ]
-    },
+        dialogs: [],
+        currentMessages: [],
+        current: null
 };
 
 const messagePageReducer = (state=initialState, action) => {
     switch (action.type) {
-        case CREATE_NEW_MESSAGE:{
-
-            let objMess = {
-                txt: state.textareaText,
-                from: 'you',
-                imgURL: 'https://static-cdn.123rf.com/images/v5/index-thumbnail/84170952-b.jpg'
-            };
-            if(!state.textareaText) return state;
-
-            return { ...state,
-                AllMessages: {...state.AllMessages,
-                    [`messages${state.toWho}`]: [...state.AllMessages[`messages${state.toWho}`], objMess]
-                },
-                textareaText: ''
-            };
+        case SET_CURRENT_MESSAGES: {
+            return {
+                ...state,
+                currentMessages: [...action.mess],
+            }
         }
-        case CHANGE_MESSAGE_AREA:{
-            let stateCopy = {...state};
-            stateCopy.textareaText = action.letter;
-            return stateCopy;
+        case SET_CURRENT_AUTHOR: {
+            return {
+                ...state, current: action.id
+            }
+        }
+        case SET_DIALOGS: {
+            return {
+                ...state, dialogs: action.dialogs
+            }
         }
         default: return state;
     }
 };
-export const createNewMessageActionCreator = () => {
+
+export const setDialogs = (dialogs) => {
     return {
-        type: CREATE_NEW_MESSAGE,
+        type: SET_DIALOGS,
+        dialogs
     }
 };
-export const changeMessageAreaActionCreator = (txt) => {
+export const setCurrentMessages = (mess) => {
     return {
-        type: CHANGE_MESSAGE_AREA,
-        letter: txt,
+        type: SET_CURRENT_MESSAGES,
+        mess,
+}
+};
+export const setCurrentAuthor = (id) => {
+    return {
+        type: SET_CURRENT_AUTHOR,
+        id
+    }
+};
+
+export const getMessageData_TC = (id, jwt, toWho) => {
+    return (dispatch) => {
+        const headers = {
+            authorization: `Bearer ${jwt}`,
+        };
+        getMessageData(id, headers).then(data => {
+            if (data.authors) {
+                dispatch(setDialogs(data.authors));
+            } else {
+                dispatch(setCurrentMessages(data.messages, id));
+            }
+            if(toWho) {
+                dispatch(setCurrentAuthor(toWho))
+            }
+        })
+    }
+};
+export const sendMessage_TC = (id_toWho, body) => {
+    return (dispatch) => {
+        createMessage(id_toWho, body).then(data => {
+            dispatch(setCurrentMessages(data.messages));
+        })
     }
 };
 
